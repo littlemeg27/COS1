@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC05C600-A73B-48AB-8698-0D78C3C2C831}</ProjectGuid>
+    <ProjectGuid>{CB6437D6-4756-4889-907A-BF2368AA0C44}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GOLStartUpTemplate1</RootNamespace>
-    <AssemblyName>GOLStartUpTemplate1</AssemblyName>
+    <RootNamespace>ConwaysGameOfLife</RootNamespace>
+    <AssemblyName>ConwaysGameOfLife</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

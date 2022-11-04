@@ -1,5 +1,5 @@
 ﻿
-namespace GOLStartUpTemplate1
+namespace ConwaysGameOfLife
 {
     partial class Form1
     {
@@ -62,7 +62,7 @@ namespace GOLStartUpTemplate1
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.graphicsPanel1 = new GOLStartUpTemplate1.GraphicsPanel();
+            this.graphicsPanel1 = new ConwaysGameOfLife.GraphicsPanel();
             this.toolStripStatusLabelGenerations = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();

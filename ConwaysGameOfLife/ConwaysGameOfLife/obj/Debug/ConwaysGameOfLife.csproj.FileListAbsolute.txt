@@ -1,0 +1,10 @@
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\ConwaysGameOfLife.exe.config
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\ConwaysGameOfLife.exe
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\bin\Debug\ConwaysGameOfLife.pdb
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\ConwaysGameOfLife.csproj.AssemblyReference.cache
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\ConwaysGameOfLife.Form1.resources
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\ConwaysGameOfLife.Properties.Resources.resources
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\ConwaysGameOfLife.csproj.GenerateResource.cache
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\ConwaysGameOfLife.csproj.CoreCompileInputs.cache
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\ConwaysGameOfLife.exe
+C:\Users\Brenna\Documents\MobileDevelopment\COS1\ConwaysGameOfLife\ConwaysGameOfLife\obj\Debug\ConwaysGameOfLife.pdb
