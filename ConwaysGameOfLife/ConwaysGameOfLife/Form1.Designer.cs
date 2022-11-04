@@ -1,8 +1,68 @@
 ﻿
 namespace ConwaysGameOfLife
 {
-    partial class Form1
+    partial class Form1 : Form1
     {
+        //Create universe 
+        bool[,] universeArray = new bool[5, 5];
+
+        //Set the colors
+        Color gridColor = Color.Black;
+        Color cellColor = Color.Blue;
+
+        //Timing
+        Timer timing = new Timer();
+
+        //Generation counting
+        int generationCount = 0;
+
+        public Form1()
+        {
+            InitializeComponent();
+
+            //Setup the timers
+            timing.Interval = 100;
+            timing.Tick += Timer_Tick;
+            timing.Enabled = false;
+        }
+
+        private void NextGeneration()
+        {
+            generationCount++;
+
+            toolStripStatusLabelGenerations.Text = "Generations = " + generationCount.ToString();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            NextGeneration();
+        }
+
+        private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                int cellWidth = graphicsPanel1.ClientSize.Width / universeArray.GetLength(0);
+                int cellHeight = graphicsPanel1.ClientSize.Height / universeArray.GetLength(1);
+
+                int x = e.X / cellWidth;
+                int y = e.Y / cellHeight;
+
+                universeArray[x, y] = !universeArray[x, y];
+
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -19,6 +79,8 @@ namespace ConwaysGameOfLife
                 components.Dispose();
             }
             base.Dispose(disposing);
+
+         
         }
 
         #region Windows Form Designer generated code
