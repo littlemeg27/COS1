@@ -17,7 +17,7 @@ namespace ConwaysGameOfLife
 
         // Drawing colors
         Color gridColor = Color.Black;
-        Color cellColor = Color.Gray;
+        Color cellColor = Color.LightBlue;
 
         // The Timer class
         Timer timer = new Timer();
