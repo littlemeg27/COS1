@@ -13,15 +13,15 @@ namespace ConwaysGameOfLife
 {
     public partial class Form1 : Form
     {
-        int board[1000][1000];
-        int number;
+       //int board[1000][1000];
+        //int number = 0;
 
         // The universe array
         bool[,] universe = new bool[5, 5];
 
         // Drawing colors
         Color gridColor = Color.Black;
-        Color cellColor = Color.LightBlue;
+        Color cellColor = Color.DeepSkyBlue;
 
         // The Timer class
         Timer timer = new Timer();
@@ -121,47 +121,47 @@ namespace ConwaysGameOfLife
             }
         }
 
-        private int liveCells(int Row, int Column)
+        /*private int liveCells(int Row, int Column)
         {
             int count = 0;
 
-            if(Row + 1 < number)
+            if (Row + 1 < number)
             {
-                if(Column - 1 > = 0 && board[Row + 1][Column - 1] == 1)
+                if (Column - 1 >= 0 && board[Row + 1][Column - 1] == 1)
                 {
                     count++;
                 }
-                if(board[Row - 1][Column] == 1)
+                if (board[Row - 1][Column] == 1)
                 {
                     count++;
                 }
-                if(Column + 1 < number && board[Row + 1][Column + 1] == 1)
+                if (Column + 1 < number && board[Row + 1][Column + 1] == 1)
                 {
                     count++;
                 }
             }
 
-            if(Row - 1 > = 0)
+            if (Row - 1 >= 0)
             {
-                if(Column - 1 > = && board[Row - 1][Column - 1] == 1)
+                if (Column - 1 > = && board[Row - 1][Column - 1] == 1)
                 {
                     count++;
                 }
-                if(board[Row - 1][Column] == 1)
+                if (board[Row - 1][Column] == 1)
                 {
                     count++;
                 }
-                if(Column + 1 < number && board[Row - 1][Column + 1] == 1)
+                if (Column + 1 < number && board[Row - 1][Column + 1] == 1)
                 {
                     count++;
                 }
             }
 
-            if(Column + 1 < number && board[Row][Column + 1] == 1)
+            if (Column + 1 < number && board[Row][Column + 1] == 1)
             {
                 count++;
             }
-            if(Column - 1 > = 0 && board[Row][Column - 1] == 1)
+            if (Column - 1 >= 0 && board[Row][Column - 1] == 1)
             {
                 count++;
             }
@@ -173,9 +173,9 @@ namespace ConwaysGameOfLife
         {
             int count = liveCells(i, j);
 
-            if(board[i][j] == 1)
+            if (board[i][j] == 1)
             {
-                if(count == 2 || count == 3)
+                if (count == 2 || count == 3)
                 {
                     return 1;
                 }
@@ -186,7 +186,7 @@ namespace ConwaysGameOfLife
             }
             else
             {
-                if(count == 3)
+                if (count == 3)
                 {
                     return 1;
                 }
@@ -199,14 +199,54 @@ namespace ConwaysGameOfLife
 
         private void displayCells()
         {
-            for(int i = 0; i < number; i++)
+            for (int i = 0; i < number; i++)
             {
-                for(int j = 0; j < number; j++)
+                for (int j = 0; j < number; j++)
                 {
-                    Console.WriteLine(board[i][j]," ");
+                    Console.WriteLine(board[i][j], " ");
                 }
                 Console.WriteLine(number);
             }
         }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine(number);
+            int countTimes = 10;
+            int nextGeneration[number][number];
+
+            for (int i = 0; i < number; i++)
+            {
+                for (int j = 0; j < number; j++)
+                {
+                    Console.WriteLine(board[i][j]);
+                    
+        }
+            }
+
+            while(countTimes--)
+            {
+                for(int i = 0; i < number; i++)
+                {
+                    for(int j = 0; j < number; j++)
+                    {
+                        nextGeneration[number][number] = checkCells(i, j);
+                    }
+                }
+                for (int i = 0; i < number; i++)
+                {
+                    for (int j = 0; j < number; j++)
+                    {
+                        board[i][j] = nextGeneration[i][j];
+                    }
+                }
+
+                Console.WriteLine(countTimes "10 - Count \n");
+                displayCells();
+                Console.WriteLine("\n");
+            }
+        }*/
     }
-}
+}    
+
+
