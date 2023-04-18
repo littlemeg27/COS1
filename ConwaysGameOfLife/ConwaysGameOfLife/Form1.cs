@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +14,10 @@ namespace ConwaysGameOfLife
 {
     public partial class Form1 : Form
     {
-       //int board[1000][1000];
-        //int number = 0;
-
         // The universe array
-        bool[,] universe = new bool[5, 5];
+        bool[,] universe = new bool[6, 5];
+        bool[,] scratchPad = new bool[6, 5];
+
 
         // Drawing colors
         Color gridColor = Color.Black;
@@ -36,14 +36,60 @@ namespace ConwaysGameOfLife
             // Setup the timer
             timer.Interval = 100; // milliseconds
             timer.Tick += Timer_Tick;
-            timer.Enabled = true; // start timer running
+            timer.Enabled = false; // start timer running
+
+            //Introduction introForm = new Introduction();
+            //introForm.ShowDialog();
+            //current = DEFAULT;
+            //pb.BackColor = current.GetBackground();
+            //cgol = new Game(new SolidBrush(current.GetForeground()), rows, columns, CELL_WIDTH);
+            //generations = 0;
+            //generationTimer.Start();
         }
 
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-            // Increment generation count
-            generations++;
+            for(int i = 0; i < universe.GetLength(1); i++)
+            {
+                //Go from left to right in the universe
+                for(int j = 0; j < universe.GetLength(0); j++)
+                {
+                    //Set count 
+                    int count = 0;
+
+                    //Apply all rules 
+                    if(universe[i, j])
+                    {
+                        if(count == 2 || count == 3)
+                        { 
+                            universe[i, j] = true; 
+                        }
+                        if(count < 2 || count > 3)
+                        {
+                            universe[i, j] = false; 
+                        }
+                    }
+                    else
+                    {
+                        if(count == 3)
+                        {
+                            universe[i, j] = true; 
+                        }
+                    }
+
+                    //Turn on or off scratch pad 
+                }
+            }
+                //Copy from scratchPad to universe
+ 
+                //Swap arrays 
+                bool[,] temp = universe;
+                universe = scratchPad;
+                scratchPad = temp;
+
+                // Increment generation count
+                generations++;
 
             // Update status strip generations
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
@@ -59,9 +105,9 @@ namespace ConwaysGameOfLife
         {
             // Calculate the width and height of each cell in pixels
             // CELL WIDTH = WINDOW WIDTH / NUMBER OF CELLS IN X
-            int cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
+            float cellWidth = (float)graphicsPanel1.ClientSize.Width / (float)universe.GetLength(0);
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
-            int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+            float cellHeight = (float)graphicsPanel1.ClientSize.Height / (float)universe.GetLength(1);
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
@@ -76,7 +122,7 @@ namespace ConwaysGameOfLife
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     // A rectangle to represent each cell in pixels
-                    Rectangle cellRect = Rectangle.Empty;
+                    RectangleF cellRect = RectangleF.Empty;
                     cellRect.X = x * cellWidth;
                     cellRect.Y = y * cellHeight;
                     cellRect.Width = cellWidth;
@@ -121,132 +167,60 @@ namespace ConwaysGameOfLife
             }
         }
 
-        /*private int liveCells(int Row, int Column)
+        private int CountNeighborsFinite(int x, int y)
         {
             int count = 0;
-
-            if (Row + 1 < number)
+            int xLen = universe.GetLength(0);
+            int yLen = universe.GetLength(1);
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
             {
-                if (Column - 1 >= 0 && board[Row + 1][Column - 1] == 1)
+                for (int xOffset = -1; xOffset <= 1; xOffset++)
                 {
-                    count++;
-                }
-                if (board[Row - 1][Column] == 1)
-                {
-                    count++;
-                }
-                if (Column + 1 < number && board[Row + 1][Column + 1] == 1)
-                {
-                    count++;
+                    int xCheck = x + xOffset;
+                    int yCheck = y + yOffset;
+                    // if xOffset and yOffset are both equal to 0 then continue
+                    // if xCheck is less than 0 then continue
+                    // if yCheck is less than 0 then continue
+                    // if xCheck is greater than or equal too xLen then continue
+                    // if yCheck is greater than or equal too yLen then continue
+
+                    if (universe[xCheck, yCheck] == true) count++;
                 }
             }
-
-            if (Row - 1 >= 0)
-            {
-                if (Column - 1 > = && board[Row - 1][Column - 1] == 1)
-                {
-                    count++;
-                }
-                if (board[Row - 1][Column] == 1)
-                {
-                    count++;
-                }
-                if (Column + 1 < number && board[Row - 1][Column + 1] == 1)
-                {
-                    count++;
-                }
-            }
-
-            if (Column + 1 < number && board[Row][Column + 1] == 1)
-            {
-                count++;
-            }
-            if (Column - 1 >= 0 && board[Row][Column - 1] == 1)
-            {
-                count++;
-            }
-
             return count;
         }
 
-        private int checkCells(int i, int j)
+        private int CountNeighborsToroidal(int x, int y)
         {
-            int count = liveCells(i, j);
+            int count = 0;
+            int xLen = universe.GetLength(0);
+            int yLen = universe.GetLength(1);
+            for (int yOffset = -1; yOffset <= 1; yOffset++)
+            {
+                for (int xOffset = -1; xOffset <= 1; xOffset++)
+                {
+                    int xCheck = x + xOffset;
+                    int yCheck = y + yOffset;
+                    // if xOffset and yOffset are both equal to 0 then continue
+                    // if xCheck is less than 0 then set to xLen - 1
+                    // if yCheck is less than 0 then set to yLen - 1
+                    // if xCheck is greater than or equal too xLen then set to 0
+                    // if yCheck is greater than or equal too yLen then set to 0
 
-            if (board[i][j] == 1)
-            {
-                if (count == 2 || count == 3)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 0;
+                    if (universe[xCheck, yCheck] == true) count++;
                 }
             }
-            else
-            {
-                if (count == 3)
-                {
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
+            return count;
         }
 
-        private void displayCells()
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < number; i++)
-            {
-                for (int j = 0; j < number; j++)
-                {
-                    Console.WriteLine(board[i][j], " ");
-                }
-                Console.WriteLine(number);
-            }
+            this.Close();
         }
 
-        static void Main(string[] args)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            Console.WriteLine(number);
-            int countTimes = 10;
-            int nextGeneration[number][number];
 
-            for (int i = 0; i < number; i++)
-            {
-                for (int j = 0; j < number; j++)
-                {
-                    Console.WriteLine(board[i][j]);
-                    
         }
-            }
-
-            while(countTimes--)
-            {
-                for(int i = 0; i < number; i++)
-                {
-                    for(int j = 0; j < number; j++)
-                    {
-                        nextGeneration[number][number] = checkCells(i, j);
-                    }
-                }
-                for (int i = 0; i < number; i++)
-                {
-                    for (int j = 0; j < number; j++)
-                    {
-                        board[i][j] = nextGeneration[i][j];
-                    }
-                }
-
-                Console.WriteLine(countTimes "10 - Count \n");
-                displayCells();
-                Console.WriteLine("\n");
-            }
-        }*/
     }
-}    
-
-
+}
